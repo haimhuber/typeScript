@@ -233,12 +233,12 @@
 // marathon1.thirdPlaceRunnerName = "Joohny";
 class Car {
     constructor(howManyDoors, manufacturer, modelName, year, plate, price) {
-        this.howManyDoors = howManyDoors;
-        this.manufacturer = manufacturer;
-        this.modelName = modelName;
-        this.year = year;
-        this.plate = plate;
-        this.price = price;
+        this.howManyDoors = howManyDoors !== null && howManyDoors !== void 0 ? howManyDoors : 0;
+        this.manufacturer = manufacturer !== null && manufacturer !== void 0 ? manufacturer : "";
+        this.modelName = modelName !== null && modelName !== void 0 ? modelName : "";
+        this.year = year !== null && year !== void 0 ? year : 0;
+        this.plate = plate !== null && plate !== void 0 ? plate : "String";
+        this.price = price !== null && price !== void 0 ? price : 0;
     }
     priceReduction(discountPercentage) {
         if (discountPercentage >= 10 && discountPercentage <= 25) {
@@ -252,6 +252,24 @@ class Car {
         return `${this.manufacturer} - ${this.modelName} has ${this.howManyDoors} doors. The year is ${this.year}, plate name: ${this.plate} and the price is: ${this.price}`;
     }
 }
-const car1 = new Car(5, "Suzuki", "Super Swift", 2024, "30211205", 120000);
-const car2 = new Car(5, "Kia", "Nero", 2024, "36521204", 150000);
-console.log(car1.toString());
+class Truck extends Car {
+    constructor(howManyDoors, manufacturer, modelName, year, plate, price, howManyAxles, maxLoadWeight, currLoadWeight) {
+        super(howManyDoors, manufacturer, modelName, year, plate, price);
+        this.howManyAxles = howManyAxles !== null && howManyAxles !== void 0 ? howManyAxles : 0;
+        this.maxLoadWeight = maxLoadWeight !== null && maxLoadWeight !== void 0 ? maxLoadWeight : 0;
+        this.currLoadWeight = currLoadWeight !== null && currLoadWeight !== void 0 ? currLoadWeight : 0;
+    }
+    howMuchCanLoadMore() {
+        const avalibleLoad = Math.abs(this.currLoadWeight - this.maxLoadWeight);
+        return `Avalible load: ${avalibleLoad}`;
+    }
+    toString() {
+        return super.toString() + " " + `Number of axels: ${this.howManyAxles}, Max load: ${this.maxLoadWeight}, Current load: ${this.currLoadWeight}`;
+    }
+}
+const truck1 = new Truck(5, "Suzuki", "Super Swift", 2024, "30211205", 120000, 8, 5000, 2500);
+console.log(truck1.howMuchCanLoadMore());
+console.log(truck1.toString());
+// const car1 = new Car(5, "Suzuki", "Super Swift", 2024, "30211205", 120000);
+// const car2 = new Car(5, "Kia", "Nero", 2024, "36521204", 150000);
+// console.log(car1.toString());

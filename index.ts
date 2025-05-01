@@ -294,13 +294,13 @@ class Car {
     plate: string;
     price: number;
 
-    constructor(howManyDoors: number, manufacturer: string, modelName: string, year: number, plate: string, price: number) {
-        this.howManyDoors = howManyDoors;
-        this.manufacturer = manufacturer;
-        this.modelName = modelName;
-        this.year = year;
-        this.plate = plate;
-        this.price = price;
+    constructor(howManyDoors?: number, manufacturer?: string, modelName?: string, year?: number, plate?: string, price?: number) {
+        this.howManyDoors = howManyDoors ?? 0;
+        this.manufacturer = manufacturer ?? "";
+        this.modelName = modelName ?? "";
+        this.year = year ?? 0;
+        this.plate = plate ?? "String";
+        this.price = price ?? 0;
     }
 
     priceReduction(discountPercentage: number): number {
@@ -317,11 +317,35 @@ class Car {
 
 }
 
+class Truck extends Car {
+    howManyAxles: number;
+    maxLoadWeight: number;
+    currLoadWeight: number;
+    constructor(howManyDoors: number, manufacturer: string, modelName: string, year: number, plate: string, price: number, howManyAxles?: number, maxLoadWeight?: number, currLoadWeight?: number) {
+        super(howManyDoors, manufacturer, modelName, year, plate, price);
+        this.howManyAxles = howManyAxles ?? 0;
+        this.maxLoadWeight = maxLoadWeight ?? 0;
+        this.currLoadWeight = currLoadWeight ?? 0;
+    }
 
-const car1 = new Car(5, "Suzuki", "Super Swift", 2024, "30211205", 120000);
-const car2 = new Car(5, "Kia", "Nero", 2024, "36521204", 150000);
+    howMuchCanLoadMore(): string {
+        const avalibleLoad = Math.abs(this.currLoadWeight - this.maxLoadWeight);
+        return `Avalible load: ${avalibleLoad}`;
+    }
 
-console.log(car1.toString());
+    toString(): string {
+        return super.toString() + " " + `Number of axels: ${this.howManyAxles}, Max load: ${this.maxLoadWeight}, Current load: ${this.currLoadWeight}`;
+    }
+}
+
+const truck1 = new Truck(5, "Suzuki", "Super Swift", 2024, "30211205", 120000, 8, 5000, 2500);
+console.log(truck1.howMuchCanLoadMore());
+console.log(truck1.toString());
+
+// const car1 = new Car(5, "Suzuki", "Super Swift", 2024, "30211205", 120000);
+// const car2 = new Car(5, "Kia", "Nero", 2024, "36521204", 150000);
+
+// console.log(car1.toString());
 
 
 
