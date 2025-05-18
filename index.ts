@@ -476,20 +476,20 @@
 // Task 3: Add a method toString() in POI that returns a string with all fields - DONE
 
 // Task 4: Create a class RestaurantPOI that extends POI
-// Add private fields: cuisineType: string, rating: number (0–5)
+// Add private fields: cuisineType: string, rating: number (0–5) - DONE
 
-// Task 5: Add getters and setters for RestaurantPOI fields with validation
+// Task 5: Add getters and setters for RestaurantPOI fields with validation - DONE
 
-// Task 6: Override toString() in RestaurantPOI to include the extra fields
+// Task 6: Override toString() in RestaurantPOI to include the extra fields - DONE
 
 // Task 7: Create a class VistaPointPOI that extends POI
-// Add a private field: viewDescription: string
+// Add a private field: viewDescription: string - DONE
 
-// Task 8: Add getter and setter for viewDescription
-// Implement toString() accordingly
+// Task 8: Add getter and setter for viewDescription - DONE
+// Implement toString() accordingly - DONE
 
-// Task 9: Create a class NaturalReservePOI that extends POI
-// Add private fields: protectedArea: boolean, entryFee: number
+// Task 9: Create a class NaturalReservePOI that extends POI - DONE
+// Add private fields: protectedArea: boolean, entryFee: number - DONE
 
 // Task 10: Add getters/setters with validation + override toString()
 // Create at least one instance of each class and print their details using toString()
@@ -516,7 +516,7 @@ class POI {
     }
 
     public set checkLon(lon: number) {
-        // Set latitude only if it hasn't been set yet
+        // Set longtude only if it hasn't been set yet
         if (this.longitude === undefined || this.longitude === null || this.longitude > 0) {
             this.longitude = lon;
         }
@@ -546,7 +546,71 @@ class POI {
 class RestaurantPOI extends POI {
     constructor(name: string, latitude: number, longitude: number, private cuisineType: string, private rating: number) {
         super(name, latitude, longitude);
+        this.cuisineType = cuisineType;
+        this.rating = rating;
+    }
 
+    public set cuisineTypeValidate(cuisine: string) {
+        if (this.cuisineType === undefined || this.cuisineType === null) {
+            this.cuisineType = cuisine;
+        }
+        else {
+            throw new Error("cuisineType must be set");
+
+        }
+    }
+    public set ratingValidate(rate: number) {
+        if (this.rating > 0 || this.rating < 5) {
+            this.rating = rate;
+        }
+        else {
+            throw new Error("Rate must be between 0-5");
+
+        }
+    }
+    public get cuisine(): string {
+        return this.cuisineType;
+    }
+    public get rate(): number {
+        return this.rating;
+    }
+
+    override toString(): string {
+        return `Returant Name: ${super.name1}, LAT: ${super.latitude1}, LON: ${super.longitude1}, Cuisine Type: ${this.cuisineType}, Rating: ${this.rating}`;
+    }
+}
+
+class VistaPointPOI extends POI {
+    constructor(name: string, latitude: number, longitude: number, private viewDescription: string) {
+        super(name, latitude, longitude);
+        this.viewDescription = viewDescription;
+    }
+    public set viewDescriptionValidate(view: string) {
+        if (this.viewDescription === undefined || this.viewDescription === null) {
+            this.viewDescription = view;
+        }
+        else {
+            throw new Error("viewDescription must be set");
+
+        }
+    }
+    public get getViewDescription(): string {
+        return this.viewDescription;
+    }
+    override toString(): string {
+        return `Returant Name: ${super.name1}, LAT: ${super.latitude1}, LON: ${super.longitude1}, View Description: ${this.viewDescription}`;
+    }
+}
+
+class NaturalReservePOI extends POI {
+    constructor(name: string, latitude: number, longitude: number, private protectedArea: boolean, private entryFee: number) {
+        super(name, latitude, longitude);
+        this.protectedArea = protectedArea;
+        this.entryFee = entryFee;
+    }
+
+    override toString(): string {
+        return `Returant Name: ${super.name1}, LAT: ${super.latitude1}, LON: ${super.longitude1}, Is Protected: ${this.protectedArea}, Entry fee: ${this.entryFee}`;
     }
 }
 
