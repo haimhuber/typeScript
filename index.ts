@@ -616,10 +616,36 @@ class NaturalReservePOI extends POI {
 
 let poi1 = new POI("Haifa", -5, -56);
 
+// Abstract classes
 
 
+abstract class Person {
+    name: string;
+    constructor(name: string) {
+        this.name = name;
 
+    }
+    abstract introduceSelf(): string;
+}
 
+class Student extends Person {
+    constructor(name: string, private avdGrade: number, private startYear: number, private endYear: number) {
+        super(name);
+    }
+
+    introduceSelf(): string {
+        return `I'm student in my ${(new Date().getFullYear())} - ${this.startYear} study year`;
+    }
+}
+
+class Employee extends Person {
+    constructor(name: string, private job: string) {
+        super(name);
+    }
+    introduceSelf(): string {
+        return `I'm employee and my job is ${this.job}`;
+    }
+}
 
 
 
