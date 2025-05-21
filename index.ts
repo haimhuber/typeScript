@@ -565,7 +565,6 @@ class RestaurantPOI extends POI {
         }
         else {
             throw new Error("Rate must be between 0-5");
-
         }
     }
     public get cuisine(): string {
